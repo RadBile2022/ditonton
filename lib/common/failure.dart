@@ -23,4 +23,6 @@ class DatabaseFailure extends Failure {
 
 class CacheFailure extends Failure {
   CacheFailure(String message) : super(message);
+}class CommonFailure extends Failure {
+  CommonFailure(String message) : super(message);
 }

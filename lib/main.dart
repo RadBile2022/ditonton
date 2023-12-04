@@ -52,6 +52,7 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/injection_tv.dart' as di_tv;
 
+import 'common/ssl-pinning.dart';
 import 'firebase_options.dart';
 
 class MyBlocObserver extends BlocObserver {
@@ -82,6 +83,7 @@ class MyBlocObserver extends BlocObserver {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await HttpSSLPinning.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
