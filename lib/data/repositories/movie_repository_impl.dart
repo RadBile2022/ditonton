@@ -27,8 +27,8 @@ class MovieRepositoryImpl implements MovieRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await remoteDataSource.getNowPlayingMovies();
-        localDataSource.cacheNowPlayingMovies(
-            result.map((movie) => MovieTable.fromDTO(movie)).toList());
+        // localDataSource.cacheNowPlayingMovies(
+        //     result.map((movie) => MovieTable.fromDTO(movie)).toList());
         return Right(result.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));

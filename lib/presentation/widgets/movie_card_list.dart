@@ -1,8 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain_tv/usecases/get_watchlist_status.dart';
+import 'package:ditonton/presentation/bloc/movie_detail_bloc/detail/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_detail_bloc/recommendations/movie_recommendation_bloc.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -15,6 +21,11 @@ class MovieCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         onTap: () {
+
+          context.read<MovieDetailBloc>().add(OnGetMovieDetailFetch(id: movie.id));
+          context.read<MovieRecommendationBloc>().add(OnMovieRecommendationFetch(id: movie.id));
+          context.read<MovieWatchlistBloc>().add(OnStatusMovieWatchlistEvent(movie.id));
+
           Navigator.pushNamed(
             context,
             MovieDetailPage.ROUTE_NAME,

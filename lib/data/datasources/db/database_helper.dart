@@ -78,7 +78,7 @@ class DatabaseHelper {
       for (final movie in movies) {
         final movieJson = movie.toJson();
         movieJson['category'] = category;
-        txn.insert(_tblCache, movieJson);
+      await  txn.insert(_tblCache, movieJson, conflictAlgorithm: ConflictAlgorithm.replace);
       }
     });
   }
@@ -105,7 +105,7 @@ class DatabaseHelper {
 
   Future<int> insertWatchlist(MovieTable movie) async {
     final db = await database;
-    return await db!.insert(_tblWatchlist, movie.toJson());
+    return await db!.insert(_tblWatchlist, movie.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<int> removeWatchlist(MovieTable movie) async {

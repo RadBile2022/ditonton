@@ -15,6 +15,13 @@ import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/presentation/bloc/movie_detail_bloc/detail/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_detail_bloc/recommendations/movie_recommendation_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_list_bloc/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_list_bloc/popular/popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_list_bloc/top_rated/top_rated_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -101,4 +108,44 @@ void init() {
   // external
   locator.registerLazySingleton(() => http.Client());
   locator.registerLazySingleton(() => DataConnectionChecker());
+
+  // bloc
+  locator.registerFactory(
+    () => MovieSearchBloc(locator()),
+  );
+  locator.registerFactory(
+    () => NowPlayingBloc(
+      getNowPlayingMovies: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => PopularBloc(
+      getPopularMovies: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TopRatedBloc(
+      getTopRatedMovies: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieDetailBloc(
+      detailResult: locator(),
+      getMovieRecommendations:  locator(),
+      getWatchListStatus: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieRecommendationBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieWatchlistBloc(
+      locator(),
+      locator(),
+      locator(),
+      locator(),
+    ),
+  );
 }

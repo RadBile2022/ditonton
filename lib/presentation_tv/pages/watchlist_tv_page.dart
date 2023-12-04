@@ -2,8 +2,10 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation_tv/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
 import '../widgets/card_list.dart';
 
 class WatchlistTvPage extends StatefulWidget {
@@ -18,9 +20,11 @@ class _WatchlistTvPageState extends State<WatchlistTvPage>
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
+    context.read<TvWatchlistBloc>().add(OnGetTvWatchlistEvent());
+
+    // Future.microtask(() =>
+    //     Provider.of<WatchlistTvNotifier>(context, listen: false)
+    //         .fetchWatchlistMovies());
   }
 
   @override
@@ -30,8 +34,8 @@ class _WatchlistTvPageState extends State<WatchlistTvPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
+    context.read<TvWatchlistBloc>().add(OnGetTvWatchlistEvent());
+
   }
 
   @override
@@ -42,24 +46,24 @@ class _WatchlistTvPageState extends State<WatchlistTvPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTvNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
+        child: BlocBuilder<TvWatchlistBloc,TvWatchlistState>(
+          builder: (context, state) {
+            if (state is TvWatchlistLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.Loaded) {
+            } else if (state is TvGetWatchlistHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.watchlistMovies[index];
+                  final movie = state.Tvs[index];
                   return CardList(movie);
                 },
-                itemCount: data.watchlistMovies.length,
+                itemCount:  state.Tvs.length,
               );
             } else {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text("Failed"),
               );
             }
           },

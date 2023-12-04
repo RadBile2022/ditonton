@@ -12,6 +12,13 @@ import 'package:ditonton/domain_tv/usecases/get_watchlist_tv.dart';
 import 'package:ditonton/domain_tv/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain_tv/usecases/save_watchlist.dart';
 import 'package:ditonton/domain_tv/usecases/search_movies.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_detail_bloc/detail/tv_detail_bloc.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_detail_bloc/recommendations/tv_recommendation_bloc.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_list_bloc/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_list_bloc/popular/popular_bloc.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_list_bloc/top_rated/top_rated_bloc.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_search_bloc/tv_search_bloc.dart';
+import 'package:ditonton/presentation_tv/bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
 import 'package:ditonton/presentation_tv/provider/playing_now_tv_notifier.dart';
 import 'package:ditonton/presentation_tv/provider/popular_tv_notifier.dart';
 import 'package:ditonton/presentation_tv/provider/top_rated_tv_notifier.dart';
@@ -103,4 +110,44 @@ void init() {
   // network info sudah di injection
 
   // external sudah di injection
+
+  // bloc
+  locator.registerFactory(
+        () => TvSearchBloc(locator()),
+  );
+  locator.registerFactory(
+        () => NowPlayingTvBloc(
+      getNowPlayingTvs: locator(),
+    ),
+  );
+  locator.registerFactory(
+        () => PopularTvBloc(
+      getPopularTvs:  locator(),
+    ),
+  );
+  locator.registerFactory(
+        () => TopRatedTvBloc(
+      getTopRatedTvs:  locator(),
+    ),
+  );
+  locator.registerFactory(
+        () => TvDetailBloc(
+      detailResult: locator(),
+      getTvRecommendations:   locator(),
+      getWatchListStatus: locator(),
+    ),
+  );
+  locator.registerFactory(
+        () => TvRecommendationBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+        () => TvWatchlistBloc(
+      locator(),
+      locator(),
+      locator(),
+      locator(),
+    ),
+  );
 }
