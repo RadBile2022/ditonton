@@ -131,8 +131,6 @@ void init() {
   locator.registerFactory(
     () => MovieDetailBloc(
       detailResult: locator(),
-      getMovieRecommendations:  locator(),
-      getWatchListStatus: locator(),
     ),
   );
   locator.registerFactory(

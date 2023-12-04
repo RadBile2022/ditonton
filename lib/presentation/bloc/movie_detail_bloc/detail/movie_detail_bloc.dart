@@ -15,13 +15,9 @@ part 'movie_detail_state.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final GetMovieDetail detailResult;
-  final GetMovieRecommendations getMovieRecommendations;
-  final GetWatchListStatus getWatchListStatus;
 
   MovieDetailBloc({
     required this.detailResult,
-    required this.getMovieRecommendations,
-    required this.getWatchListStatus,
   }) : super(MovieDetailInitial()) {
     on<OnGetMovieDetailFetch>((event, emit) async {
       emit(MovieDetailLoading());
