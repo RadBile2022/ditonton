@@ -1,11 +1,6 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation_tv/bloc/tv_list_bloc/now_playing/now_playing_bloc.dart';
-import 'package:ditonton/presentation_tv/provider/playing_now_tv_notifier.dart';
-import 'package:ditonton/presentation_tv/provider/popular_tv_notifier.dart';
-import 'package:ditonton/presentation_tv/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/card_list.dart';
 

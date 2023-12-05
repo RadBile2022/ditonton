@@ -14,7 +14,6 @@ import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation_tv/pages/home_tv_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../presentation_tv/pages/watchlist_tv_page.dart';
 import '../bloc/movie_detail_bloc/detail/movie_detail_bloc.dart';
 import '../bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';

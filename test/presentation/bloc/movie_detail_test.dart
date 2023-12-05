@@ -5,7 +5,7 @@ import 'package:ditonton/presentation/bloc/movie_detail_bloc/detail/movie_detail
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
-import '../provider/movie_detail_notifier_test.mocks.dart';
+import '../helper.mocks.dart';
 
 void main() {
   late MockGetMovieDetail mockGetMovieDetail;

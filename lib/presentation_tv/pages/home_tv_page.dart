@@ -11,7 +11,6 @@ import 'package:ditonton/presentation_tv/pages/search_page.dart';
 import 'package:ditonton/presentation_tv/pages/top_rated_tv_page.dart';
 import 'package:ditonton/presentation_tv/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation_tv/pages/watchlist_tv_page.dart';
-import 'package:ditonton/presentation_tv/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';

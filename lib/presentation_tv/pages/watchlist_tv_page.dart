@@ -1,6 +1,4 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation_tv/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +20,6 @@ class _WatchlistTvPageState extends State<WatchlistTvPage>
     super.initState();
     context.read<TvWatchlistBloc>().add(OnGetTvWatchlistEvent());
 
-    // Future.microtask(() =>
-    //     Provider.of<WatchlistTvNotifier>(context, listen: false)
-    //         .fetchWatchlistMovies());
   }
 
   @override
